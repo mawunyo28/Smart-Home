@@ -1,4 +1,4 @@
-pub mod smart_device {
+
 
     use std::{thread::sleep, time::Duration};
 
@@ -6,9 +6,9 @@ pub mod smart_device {
 
     #[derive(Debug)]
     pub struct SmartDevice {
-        name: String,
-        model_number: String,
-        device_description: String,
+        pub name: String,
+        pub model_number: String,
+        pub device_description: String,
     }
 
     impl SmartDevice {
@@ -51,17 +51,17 @@ pub mod smart_device {
         }
     }
 
-    struct SmartLightSpecs {
-        has_voice_control: bool,
-        has_remote_contorl: bool,
-        has_mobile_app: bool,
+    pub struct SmartLightSpecs {
+        pub has_voice_control: bool,
+        pub has_remote_contorl: bool,
+        pub has_mobile_app: bool,
 
-        light_intensity: f64,
-        light_levels: u8,
-        current_light_level: u8,
+        pub light_intensity: f64,
+        pub light_levels: u8,
+        pub current_light_level: u8,
     }
 
-    enum SmartLight {
+    pub enum SmartLight {
         GoogleLight(SmartDevice, SmartLightSpecs),
         AppleLight(SmartDevice, SmartLightSpecs),
         SamsungLight(SmartDevice, SmartLightSpecs),
@@ -69,7 +69,7 @@ pub mod smart_device {
     }
 
     impl SmartLight {
-        fn power_on(&self) {
+        pub fn power_on(&self) {
             match self {
                 SmartLight::GoogleLight(smart_device, light_specs) => smart_device.power_on(),
                 SmartLight::AppleLight(smart_device, light_specs) => smart_device.power_on(),
@@ -78,7 +78,7 @@ pub mod smart_device {
             }
         }
 
-        fn power_off(&self) {
+        pub fn power_off(&self) {
             match self {
                 SmartLight::GoogleLight(smart_device, light_specs) => smart_device.power_off(),
                 SmartLight::AppleLight(smart_device, light_specs) => smart_device.power_off(),
@@ -88,11 +88,11 @@ pub mod smart_device {
         }
     }
 
-    impl SmartLight {}
+
 
     enum SmartTV {}
 
     enum SmartTheatre {}
 
     enum SmartFridge {}
-}
+
