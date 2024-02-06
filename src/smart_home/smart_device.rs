@@ -1,98 +1,113 @@
 
 
-    use std::{thread::sleep, time::Duration};
+use std::{thread::sleep, time::Duration};
+use std::fmt::Debug;
 
 
+pub trait Device {
+    fn power_on(&self) {
+        println!("Smart Device is powering on ......",);
+        sleep(Duration::from_secs(1));
+        
+        println!("Loading....");
+        sleep(Duration::from_secs(3));
+        
+        println!("Smart Device is Ready!");
+    }
+    
+    fn power_off(&self) {
+        println!("Smart Device is turning off.....",);
+        sleep(Duration::from_secs(1));
+        println!("Byebye....");
+    }
+    
+    fn print_device_info(&self) ;
+    
+    fn print_name(&self);
+    
+    fn device_description(&self);
+    
+    fn device_model_number(&self);
+    
+    
+}
 
-    #[derive(Debug)]
-    pub struct SmartDevice {
-        pub name: String,
-        pub model_number: String,
-        pub device_description: String,
+
+pub trait Specs {
+    fn getSpecs();
+}
+
+
+#[derive(Debug)]
+pub struct SmartLightSpecs {
+    pub has_voice_control: bool,
+    pub has_remote_contorl: bool,
+    pub has_mobile_app: bool,
+    
+    pub light_intensity: f64,
+    pub light_levels: u8,
+    pub current_light_level: u8,
+}
+
+
+#[derive(Debug)]
+pub enum SmartLightType {
+    Ceiling,
+    Strip {lenght: f64},
+    Plug,
+    Clip,
+    DeskLamp,
+    Lamp
+
+}
+
+#[derive(Debug)]
+pub enum SmartLightKind {
+    GoogleLight,
+    MawunyoLamp,
+    AppleSpark,
+    OkRoverRGBStrips,
+    SamsungPlayLights
+
+}
+
+#[derive(Debug)]
+pub struct SmartLight {
+    pub name: String,
+    pub model_number: String,
+    pub device_description: String,
+    pub specs: SmartLightSpecs,
+    pub smart_light_type: SmartLightType,
+    pub smart_light_kind: SmartLightKind
+}
+
+impl Device for SmartLight {
+    fn print_device_info(&self)  {
+        println!("Device {:#?}\nSpecs {:#?}", &self, &self.specs);
     }
 
-    impl SmartDevice {
-        pub fn power_on(&self) {
-            println!(
-                "Smart {} {} is powering on ......",
-                self.device_description, self.name
-            );
-            sleep(Duration::from_secs(1));
-
-            println!("Loading....");
-            sleep(Duration::from_secs(3));
-
-            println!("Smart {} {} is Ready!", self.device_description, self.name);
-        }
-
-        pub fn power_off(&self) {
-            println!(
-                "Smart {} {} is turning off.....",
-                self.device_description, &self.name
-            );
-            sleep(Duration::from_secs(1));
-        }
-
-        pub fn from(name: String, model_number: String, device_description: String) -> SmartDevice {
-            let smart_dev = SmartDevice {
-                name,
-                device_description,
-                model_number,
-            };
-
-            fn init(device: &SmartDevice) {
-                device.power_on();
-            }
-
-            init(&smart_dev);
-
-            return smart_dev;
-            
-        }
+    fn print_name(&self) {
+        todo!()
     }
 
-    pub struct SmartLightSpecs {
-        pub has_voice_control: bool,
-        pub has_remote_contorl: bool,
-        pub has_mobile_app: bool,
-
-        pub light_intensity: f64,
-        pub light_levels: u8,
-        pub current_light_level: u8,
+    fn device_description(&self) {
+        todo!()
     }
 
-    pub enum SmartLight {
-        GoogleLight(SmartDevice, SmartLightSpecs),
-        AppleLight(SmartDevice, SmartLightSpecs),
-        SamsungLight(SmartDevice, SmartLightSpecs),
-        MawunyoLamp(SmartDevice, SmartLightSpecs),
+    fn device_model_number(&self) {
+        todo!()
     }
+}
 
-    impl SmartLight {
-        pub fn power_on(&self) {
-            match self {
-                SmartLight::GoogleLight(smart_device, light_specs) => smart_device.power_on(),
-                SmartLight::AppleLight(smart_device, light_specs) => smart_device.power_on(),
-                SmartLight::SamsungLight(smart_device, light_specs) => smart_device.power_on(),
-                SmartLight::MawunyoLamp(smart_device, light_specs) => smart_device.power_on(),
-            }
-        }
-
-        pub fn power_off(&self) {
-            match self {
-                SmartLight::GoogleLight(smart_device, light_specs) => smart_device.power_off(),
-                SmartLight::AppleLight(smart_device, light_specs) => smart_device.power_off(),
-                SmartLight::SamsungLight(smart_device, light_specs) => smart_device.power_off(),
-                SmartLight::MawunyoLamp(smart_device, light_specs) => smart_device.power_off(),
-            }
-        }
+impl Specs for SmartLightSpecs {
+    fn getSpecs() {
+        todo!()
     }
+}
 
 
+enum SmartTV {}
 
-    enum SmartTV {}
+enum SmartTheatre {}
 
-    enum SmartTheatre {}
-
-    enum SmartFridge {}
-
+enum SmartFridge {}
