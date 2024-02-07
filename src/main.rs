@@ -1,6 +1,6 @@
 
 
-use smart_home::smart_home::smart_device::{self, Device, SmartLight, SmartLightKind, SmartLightSpecs, SmartLightType};
+use smart_home::smart_home::smart_device::{self, Device, SmartLight, SmartLightKind, SmartLightSpecs, SmartLightType, Specs};
 
 fn main() {
     let smart_light = SmartLight {
@@ -20,7 +20,7 @@ fn main() {
     };
 
     smart_light.power_on();
-    smart_light.print_device_info();
+    smart_light.specs.getSpecs();
 
     
 
