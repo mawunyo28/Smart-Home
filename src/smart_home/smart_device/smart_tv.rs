@@ -1,0 +1,3 @@
+enum SmartTVKind {}
+
+enum SmartTVType {}
