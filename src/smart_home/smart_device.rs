@@ -1,34 +1,21 @@
-use std::fmt::Debug;
-use std::{thread::sleep, time::Duration};
+use crate::smart_home::smart_device::smart_light::SmartLightSpecs;
 
 pub trait Device {
-    fn power_on(&self) {
-        println!("Smart Device is powering on ......",);
-        sleep(Duration::from_secs(1));
+    fn power_on(&self);
 
-        println!("Loading....");
-        sleep(Duration::from_secs(3));
+    fn power_off(&self);
 
-        println!("Smart Device is Ready!");
-    }
+    fn get_device_info(&self) -> String;
 
-    fn power_off(&self) {
-        println!("Smart Device is turning off.....",);
-        sleep(Duration::from_secs(1));
-        println!("Byebye....");
-    }
+    fn get_name(&self) -> String;
 
-    fn print_device_info(&self);
+    fn get_device_description(&self) -> String;
 
-    fn print_name(&self);
-
-    fn device_description(&self);
-
-    fn device_model_number(&self);
+    fn get_device_model_number(&self) -> String;
 }
 
 pub trait Specs {
-    fn getSpecs(&self);
+    fn get_specs(&self) -> &SmartLightSpecs;
 }
 
 
